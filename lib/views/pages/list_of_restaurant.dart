@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:foodendra/controllers/list_of_restaurant_controller.dart';
-import 'package:foodendra/models/restaurant.dart';
 import 'package:foodendra/views/pages/home_page.dart';
 import 'package:foodendra/views/pages/restaurant_page.dart';
 import 'package:foodendra/widgets/custom/home_button.dart';
@@ -52,6 +51,7 @@ class RestaurantList extends StatelessWidget {
                   ),
                 ),
                 onChanged: (value) {
+                  c.searched.value = true;
                   c.getSearchedRestaurant(value);
                 },
               ),
@@ -64,11 +64,18 @@ class RestaurantList extends StatelessWidget {
                 return SizedBox(
                   height: 600,
                   child: ListView.builder(
-                    itemCount: c.searchRestaurantResults.length,
-                    itemBuilder: (context, index) {
-                      final restaurant = c.searchRestaurantResults[index];
+                    // itemCount: c.searchRestaurantResults.length,
+                    itemCount: c.searched.value == false
+                        ? c.restaurants.length
+                        : c.searchRestaurantResults.length,
 
-                      final restaurantObject = Restaurant.fromJson(restaurant);
+                    itemBuilder: (context, index) {
+                      // final restaurant = c.searchRestaurantResults[index];
+                      final restaurant = c.searched.value == false
+                          ? c.restaurants[index]
+                          : c.searchRestaurantResults[index];
+
+                      final restaurantObject = restaurant;
                       return InkWell(
                         onTap: () {
                           Get.to(() => RestaurantHomePage(
@@ -126,7 +133,7 @@ class RestaurantList extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      restaurant['name'],
+                                      restaurant.restaurantName ?? '',
                                       style: const TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
@@ -134,7 +141,7 @@ class RestaurantList extends StatelessWidget {
                                     ),
                                     const SizedBox(height: 5),
                                     Text(
-                                      '${restaurant['address']}',
+                                      '${restaurant.restaurantAddress}',
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: Colors.grey[600],

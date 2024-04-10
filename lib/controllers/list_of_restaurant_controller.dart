@@ -9,7 +9,8 @@ import 'package:http/http.dart' as http;
 class RestaurantListController extends GetxController {
   final restaurants = <Restaurant>[].obs;
   // final restaurants = <Map<String, dynamic>>[].obs;
-  final searchRestaurantResults = List<Map<String, dynamic>>.empty().obs;
+  // final searchRestaurantResults = List<Map<String, dynamic>>.empty().obs;
+  final searchRestaurantResults = <Restaurant>[].obs;
   RxBool searched = false.obs;
   final FocusNode focusNode = FocusNode();
 
@@ -55,7 +56,8 @@ class RestaurantListController extends GetxController {
       if (response.statusCode == 200) {
         final List<dynamic> data = jsonDecode(response.body);
         searchRestaurantResults.assignAll(
-            data.map((restaurant) => Restaurant.fromJson(restaurant).toJson()));
+          data.map((restaurant) => Restaurant.fromJson(restaurant)).toList(),
+        );
       } else {
         throw Exception('Failed to search menu items');
       }
