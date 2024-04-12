@@ -196,12 +196,14 @@ class Homepage extends StatelessWidget {
                   // Use data from the API for the first restaurant
                   final firstRestaurant = a.recommendedRestaurants.first;
                   return RecommendedWidget(
-  restaurantName: firstRestaurant.restaurantName ?? '',
-  restaurantLocation: firstRestaurant.restaurantAddress ?? '',
-  restaurantRating: firstRestaurant.avgRating.toString(),
-  imagePath: firstRestaurant.restaurantImage ?? '',
-  restaurantDecription: firstRestaurant.restaurantDescription ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-);
+                    restaurantName: firstRestaurant.restaurantName ?? '',
+                    restaurantLocation: firstRestaurant.restaurantAddress ?? '',
+                    restaurantRating: firstRestaurant.avgRating.toString(),
+                    imagePath: firstRestaurant.restaurantImage ?? '',
+                    restaurantDecription:
+                        firstRestaurant.restaurantDescription ??
+                            'No description for this restaurant.',
+                  );
 
                   // return RecommendedWidget(
                   //   restaurantName: firstRestaurant['restaurant_name'],
@@ -234,7 +236,7 @@ class Homepage extends StatelessWidget {
                     const Spacer(),
                     InkWell(
                       onTap: () {
-                        Get.to(const HistoryPage());
+                        Get.to(HistoryPage());
                       },
                       child: const Text(
                         "View all",

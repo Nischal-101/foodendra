@@ -83,7 +83,7 @@ class DrawerWidget extends StatelessWidget {
             leading: const Icon(Icons.history, color: Colors.deepOrangeAccent),
             title: const Text('History'),
             onTap: () {
-              Get.to(() => const HistoryPage());
+              Get.to(() =>  HistoryPage());
             },
           ),
           ListTile(

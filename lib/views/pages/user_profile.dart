@@ -19,81 +19,97 @@ class UserProfilePage extends StatelessWidget {
         backgroundColor: Colors.deepOrangeAccent,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      body: Obx(() => SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  height: 200,
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                    color: Colors.deepOrangeAccent,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(30),
-                      bottomRight: Radius.circular(30),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 200,
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      color: Colors.deepOrangeAccent,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(30),
+                        bottomRight: Radius.circular(30),
+                      ),
+                    ),
+                    child: const Center(
+                      child: CircleAvatar(
+                        radius: 70,
+                        backgroundImage: NetworkImage(
+                            'https://upload.wikimedia.org/wikipedia/commons/1/18/Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg'),
+                      ),
                     ),
                   ),
-                  child: const Center(
-                    child: CircleAvatar(
-                      radius: 70,
-                      backgroundImage: NetworkImage(
-                          'https://upload.wikimedia.org/wikipedia/commons/1/18/Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg'),
-                    ),
+                  const SizedBox(height: 35),
+                  // const SizedBox(height: 32),
+                  profileItem(
+                    icon: Icons.person,
+                    label: 'Username',
+                    value: c.user.value!.username ?? '',
                   ),
-                ),
-                const SizedBox(height: 24),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    Get.to(() => EditUserProfilePage(
-                          username: c.user.value!.username ?? '',
-                          email: c.user.value!.email ?? '',
-                          address: c.user.value!.address ?? '',
-                          phoneNumber: c.user.value!.phoneNumber ?? '',
-                        ));
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 12),
-                    backgroundColor: Colors.deepOrangeAccent,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    shadowColor: Colors.grey,
-                    elevation: 5,
+                  profileItem(
+                    icon: Icons.email,
+                    label: 'Email',
+                    value: c.user.value?.email ?? '',
                   ),
-                  icon: const Icon(
-                    Icons.edit,
-                    color: Colors.white,
+                  profileItem(
+                    icon: Icons.phone,
+                    label: 'Phone Number',
+                    value: c.user.value!.phoneNumber ?? '',
                   ),
-                  label: const Text(
-                    'Edit Profile',
-                    style: TextStyle(color: Colors.white),
+                  profileItem(
+                    icon: Icons.location_on,
+                    label: 'Address',
+                    value: c.user.value!.address ?? '',
                   ),
-                ),
-                const SizedBox(height: 32),
-                profileItem(
-                  icon: Icons.person,
-                  label: 'Username',
-                  value: c.user.value!.username ?? '',
-                ),
-                profileItem(
-                  icon: Icons.email,
-                  label: 'Email',
-                  value: c.user.value?.email ?? '',
-                ),
-                profileItem(
-                  icon: Icons.phone,
-                  label: 'Phone Number',
-                  value: c.user.value!.phoneNumber ?? '',
-                ),
-                profileItem(
-                  icon: Icons.account_circle,
-                  label: 'Type',
-                  value: c.user.value!.type ?? '',
-                ),
-              ],
+                  profileItem(
+                    icon: Icons.account_circle,
+                    label: 'Type',
+                    value: c.user.value!.type ?? '',
+                  ),
+                ],
+              ),
             ),
-          )),
+          ),
+          SizedBox(
+            height: 55,
+            width: Get.width,
+            child: ElevatedButton.icon(
+              onPressed: () {
+                Get.to(() => EditUserProfilePage(
+                      username: c.user.value!.username ?? '',
+                      email: c.user.value!.email ?? '',
+                      address: c.user.value!.address ?? '',
+                      phoneNumber: c.user.value!.phoneNumber ?? '',
+                    ));
+              },
+              style: ElevatedButton.styleFrom(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                backgroundColor: Colors.deepOrangeAccent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(0.0),
+                ),
+                shadowColor: Colors.grey,
+                elevation: 5,
+              ),
+              icon: const Icon(
+                Icons.edit,
+                color: Colors.white,
+              ),
+              label: const Text(
+                'Edit Profile',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -114,7 +130,7 @@ Widget profileItem(
               end: Alignment.bottomRight,
               colors: [
                 Colors.deepOrangeAccent,
-                Color.fromARGB(255, 229, 14, 182)
+                Color.fromARGB(255, 229, 14, 182),
               ],
             ),
             boxShadow: [

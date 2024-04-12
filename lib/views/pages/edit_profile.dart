@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodendra/controllers/user_profile_controller.dart';
+import 'package:foodendra/views/pages/home_page.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 
 class EditUserProfilePage extends StatelessWidget {
   final String username;
@@ -29,7 +31,10 @@ class EditUserProfilePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Profile'),
+        title: const Text(
+          'Edit Profile',
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.deepOrangeAccent,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
@@ -47,40 +52,51 @@ class EditUserProfilePage extends StatelessWidget {
                   bottomRight: Radius.circular(30),
                 ),
               ),
-              child: const Center(
-                child: CircleAvatar(
-                  radius: 70,
-                  backgroundImage: NetworkImage(
-                      'https://upload.wikimedia.org/wikipedia/commons/1/18/Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg'),
-                ),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  const Center(
+                    child: CircleAvatar(
+                      radius: 70,
+                      backgroundImage: NetworkImage(
+                          'https://upload.wikimedia.org/wikipedia/commons/1/18/Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg'),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      // Get.to(Homepage());
+                    },
+                    child: const Row(
+                      // crossAxisAlignment: CrossAxisAlignment.center,
+                      // mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 112,
+                        ),
+                        Icon(
+                          Icons.edit,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "Change profile photo",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               ),
             ),
-            const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: () {
-                c.updateUserInfo(
-                  usernameController.text,
-                  emailController.text,
-                  addressController.text,
-                  phoneNumberController.text,
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                backgroundColor: Colors.deepOrangeAccent,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                shadowColor: Colors.grey,
-                elevation: 5,
-              ),
-              child: const Text(
-                'Save Changes',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 40),
             profileItem(
               icon: Icons.person,
               label: 'Username',
@@ -96,6 +112,41 @@ class EditUserProfilePage extends StatelessWidget {
               label: 'Phone Number',
               controller: phoneNumberController,
             ),
+            profileItem(
+              icon: Icons.phone,
+              label: 'Address',
+              controller: addressController,
+            ),
+            const SizedBox(
+              height: 36,
+            ),
+            SizedBox(
+              width: Get.width,
+              height: 55,
+              child: ElevatedButton(
+                onPressed: () {
+                  c.updateUserInfo(
+                    usernameController.text,
+                    emailController.text,
+                    addressController.text,
+                    phoneNumberController.text,
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  backgroundColor: Colors.deepOrangeAccent,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(0),
+                  ),
+                  elevation: 5,
+                ),
+                child: const Text(
+                  'Save Changes',
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ),
+            ),
+            // const SizedBox(height: 20),
           ],
         ),
       ),
@@ -112,34 +163,47 @@ class EditUserProfilePage extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: const LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Colors.deepOrangeAccent,
-                  Color.fromARGB(255, 229, 14, 182),
-                ],
+          Column(
+            children: [
+              const SizedBox(
+                height: 25,
               ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 7,
-                  offset: const Offset(0, 3), // changes position of shadow
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Colors.deepOrangeAccent,
+                      Color.fromARGB(255, 229, 14, 182),
+                    ],
+                  ),
+
+                  shape: BoxShape.circle,
+                  // color: Colors.deepOrangeAccent,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 7,
+                      offset: const Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            child: Icon(
-              icon,
-              color: Colors.white,
-              size: 32,
-            ),
+                child: Column(
+                  children: [
+                    Icon(
+                      icon,
+                      color: Colors.white,
+                      size: 32,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 15),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -148,16 +212,24 @@ class EditUserProfilePage extends StatelessWidget {
                   label,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                    fontSize: 14,
                     color: Colors.deepOrangeAccent, // Change label color
                   ),
                 ),
                 const SizedBox(height: 4),
-                TextFormField(
-                  controller: controller,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Enter $label', // Dynamic hint
+                SizedBox(
+                  height: 50,
+                  child: TextFormField(
+                    controller: controller,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          color: Colors.black, // Border color
+                        ),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      hintText: 'Enter $label', // Dynamic hint
+                    ),
                   ),
                 ),
               ],

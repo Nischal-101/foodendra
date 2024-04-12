@@ -68,4 +68,6 @@ class UserProfilePageController extends GetxController {
       log('Error updating user info: $e');
     }
   }
+
+  
 }

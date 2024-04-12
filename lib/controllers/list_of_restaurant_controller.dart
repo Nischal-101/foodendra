@@ -66,8 +66,21 @@ class RestaurantListController extends GetxController {
       Get.snackbar(
         'Error',
         'Failed to search restaurant items',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
+        // backgroundColor: Colors.red,
+        // colorText: Colors.white,
+        duration: const Duration(seconds: 2),
+        snackPosition: SnackPosition.TOP,
+        margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+        backgroundColor: Colors.red, // Change background color
+        colorText: Colors.white, // Change text color
+        borderRadius: 10, // Round the corners
+        borderWidth: 2, // Add border
+        borderColor: Colors.black.withOpacity(0.2), // Border color
+        snackStyle: SnackStyle.FLOATING, // Display Snackbar as floating
+        padding: const EdgeInsets.symmetric(
+          vertical: 12,
+          horizontal: 24,
+        ),
       );
     }
   }

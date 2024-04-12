@@ -41,16 +41,58 @@ class LoginController extends GetxController {
           Get.offAll(Homepage());
         } else {
           String errorMessage = jsonResponse['message'];
-          Get.snackbar('Error', errorMessage,
-              snackPosition: SnackPosition.BOTTOM);
+          Get.snackbar(
+            'Error', errorMessage,
+            duration: const Duration(seconds: 2),
+            snackPosition: SnackPosition.TOP,
+            margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+            backgroundColor: Colors.red, // Change background color
+            colorText: Colors.white, // Change text color
+            borderRadius: 10, // Round the corners
+            borderWidth: 2, // Add border
+            borderColor: Colors.black.withOpacity(0.2), // Border color
+            snackStyle: SnackStyle.FLOATING, // Display Snackbar as floating
+            padding: const EdgeInsets.symmetric(
+              vertical: 12,
+              horizontal: 24,
+            ),
+          );
         }
       } else {
-        Get.snackbar('Error', 'Failed to login. Please try again later.',
-            snackPosition: SnackPosition.BOTTOM);
+        Get.snackbar(
+          'Error', 'Failed to login. Please try again later.',
+          duration: const Duration(seconds: 2),
+          snackPosition: SnackPosition.TOP,
+          margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+          backgroundColor: Colors.red, // Change background color
+          colorText: Colors.white, // Change text color
+          borderRadius: 10, // Round the corners
+          borderWidth: 2, // Add border
+          borderColor: Colors.black.withOpacity(0.2), // Border color
+          snackStyle: SnackStyle.FLOATING, // Display Snackbar as floating
+          padding: const EdgeInsets.symmetric(
+            vertical: 12,
+            horizontal: 24,
+          ),
+        );
       }
     } catch (e) {
-      Get.snackbar('Error', 'An error occurred. Please try again later. $e',
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Error', 'An error occurred. Please try again later. $e',
+        duration: const Duration(seconds: 2),
+        snackPosition: SnackPosition.TOP,
+        margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+        backgroundColor: Colors.red, // Change background color
+        colorText: Colors.white, // Change text color
+        borderRadius: 10, // Round the corners
+        borderWidth: 2, // Add border
+        borderColor: Colors.black.withOpacity(0.2), // Border color
+        snackStyle: SnackStyle.FLOATING, // Display Snackbar as floating
+        padding: const EdgeInsets.symmetric(
+          vertical: 12,
+          horizontal: 24,
+        ),
+      );
     }
   }
 }

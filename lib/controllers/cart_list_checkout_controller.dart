@@ -50,16 +50,18 @@ class CartItemsViewController extends GetxController {
 
   // Method to handle checkout
 
-  Future<void> checkout(BuildContext context) async {
+  Future<void> checkout(BuildContext context, String restaurantId) async {
     final user = StorageHelper.getUser();
 
     try {
       if (user != null) {
         final userId = user.userId;
-        final restaurantId = int.parse(restaurantsWithMenuItems.keys.first);
+
         final totalAmount = calculateTotal(
             restaurantsWithMenuItems[restaurantId.toString()]['menu_items']);
-        const deliveryAddress = ''; // Add delivery address here
+
+        // final deliveryAddress = await getDeliveryAddress(context);
+        const deliveryAddress = "Kathmandu";
 
         final menuItems =
             restaurantsWithMenuItems[restaurantId.toString()]['menu_items'];
@@ -71,6 +73,7 @@ class CartItemsViewController extends GetxController {
             'restaurant_id': restaurantId.toString(),
             'total_amount': totalAmount.toStringAsFixed(2),
             'delivery_address': deliveryAddress,
+            'status': 'pending',
             'menu_items': jsonEncode(menuItems
                 .map((item) => {
                       'item_id': item['item_id'],
@@ -81,16 +84,24 @@ class CartItemsViewController extends GetxController {
         );
 
         if (response.statusCode == 200) {
-          await removeCart(context);
-          restaurantsWithMenuItems.clear();
-          fetchCartItems();
-
-          // If checkout successful, show success message
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Order placed successfully')),
+          await removeCart(context, restaurantId);
+          Get.snackbar(
+            'Success', 'Order placed successfully',
+            duration: const Duration(seconds: 2),
+            snackPosition: SnackPosition.TOP,
+            margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+            backgroundColor: Colors.white, // Change background color
+            colorText: Colors.black, // Change text color
+            borderRadius: 10, // Round the corners
+            borderWidth: 2, // Add border
+            borderColor: Colors.black.withOpacity(0.2), // Border color
+            snackStyle: SnackStyle.FLOATING, // Display Snackbar as floating
+            padding: const EdgeInsets.symmetric(
+              vertical: 12,
+              horizontal: 24,
+            ),
           );
         } else {
-          // If checkout failed, show error message
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Failed to place order')),
           );
@@ -102,12 +113,90 @@ class CartItemsViewController extends GetxController {
       }
     } catch (e) {
       log('Error during checkout: $e');
-      // Show error message
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Error during checkout')),
       );
     }
   }
+
+  // Future<void> checkout(BuildContext context, String restaurantId) async {
+  //   final user = StorageHelper.getUser();
+
+  //   try {
+  //     if (user != null) {
+  //       final userId = user.userId;
+
+  //       final totalAmount = calculateTotal(
+  //           restaurantsWithMenuItems[restaurantId.toString()]['menu_items']);
+  //       const deliveryAddress = ''; // Add delivery address here
+
+  //       final menuItems =
+  //           restaurantsWithMenuItems[restaurantId.toString()]['menu_items'];
+
+  //       final response = await http.post(
+  //         Uri.parse(Api.checkoutUrl),
+  //         body: {
+  //           'user_id': userId,
+  //           'restaurant_id': restaurantId.toString(),
+  //           'total_amount': totalAmount.toStringAsFixed(2),
+  //           'delivery_address': deliveryAddress,
+  //           'menu_items': jsonEncode(menuItems
+  //               .map((item) => {
+  //                     'item_id': item['item_id'],
+  //                     'quantity': item['quantity'],
+  //                   })
+  //               .toList()),
+  //         },
+  //       );
+
+  //       if (response.statusCode == 200) {
+  //         // await removeCart(context, restaurantId);
+  //         // restaurantsWithMenuItems.clear();
+  //         // fetchCartItems();
+
+  //         Get.snackbar(
+  //           'Success', 'Order placed successfully',
+  //           duration: const Duration(seconds: 2),
+  //           snackPosition: SnackPosition.TOP,
+  //           margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+  //           backgroundColor: Colors.white, // Change background color
+  //           colorText: Colors.black, // Change text color
+  //           borderRadius: 10, // Round the corners
+  //           borderWidth: 2, // Add border
+  //           borderColor: Colors.black.withOpacity(0.2), // Border color
+  //           snackStyle: SnackStyle.FLOATING, // Display Snackbar as floating
+  //           padding: const EdgeInsets.symmetric(
+  //             vertical: 12,
+  //             horizontal: 24,
+  //           ),
+  //         );
+
+  //         // If checkout successful, show success message
+  //         // ScaffoldMessenger.of(context).showSnackBar(
+  //         //   const SnackBar(
+  //         //       content: Text(
+  //         //     'Order placed successfully',
+  //         //   )),
+  //         // );
+  //       } else {
+  //         // If checkout failed, show error message
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           const SnackBar(content: Text('Failed to place order')),
+  //         );
+  //       }
+
+  //       log("Checkout response: ${response.body}");
+  //     } else {
+  //       throw Exception('User data not found');
+  //     }
+  //   } catch (e) {
+  //     log('Error during checkout: $e');
+  //     // Show error message
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(content: Text('Error during checkout')),
+  //     );
+  //   }
+  // }
 
   double calculateTotal(List<dynamic> menuItems) {
     try {
@@ -124,26 +213,38 @@ class CartItemsViewController extends GetxController {
   }
 
   // Method to remove items from cart
-  Future<void> removeCart(BuildContext context) async {
+  Future<void> removeCart(BuildContext context, String restaurantId) async {
     final user = StorageHelper.getUser();
 
     try {
       if (user != null) {
-        final userId = user.userId;
-        final restaurantId = int.parse(restaurantsWithMenuItems.keys.first);
-
         final response = await http.post(
           Uri.parse(Api.removeItemsFromCartUrl),
           body: {
-            'user_id': userId,
             'restaurant_id': restaurantId.toString(),
           },
         );
 
         if (response.statusCode == 200) {
-          // If removal successful, show success message
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Items removed from cart')),
+          // // If removal successful, show success message
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   const SnackBar(content: Text('Items removed from cart')),
+          // );
+          Get.snackbar(
+            'Success', 'Items removed from cart',
+            duration: const Duration(seconds: 2),
+            snackPosition: SnackPosition.TOP,
+            margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+            backgroundColor: Colors.white, // Change background color
+            colorText: Colors.black, // Change text color
+            borderRadius: 10, // Round the corners
+            borderWidth: 2, // Add border
+            borderColor: Colors.black.withOpacity(0.2), // Border color
+            snackStyle: SnackStyle.FLOATING, // Display Snackbar as floating
+            padding: const EdgeInsets.symmetric(
+              vertical: 12,
+              horizontal: 24,
+            ),
           );
         } else {
           // If removal failed, show error message
@@ -187,15 +288,62 @@ class CartItemsViewController extends GetxController {
       if (response.statusCode == 200) {
         // Assuming fetchCartItems updates restaurantsWithMenuItems
         fetchCartItems(); // Fetch updated cart items
-        Get.snackbar("Success", "Item removed from cart");
+        // Get.snackbar("Success", "Item removed from cart");
+        Get.snackbar(
+          "Success",
+          "Item removed from cart",
+          duration: const Duration(seconds: 2),
+          snackPosition: SnackPosition.TOP,
+          margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+          backgroundColor: Colors.white, // Change background color
+          colorText: Colors.black, // Change text color
+          borderRadius: 10, // Round the corners
+          borderWidth: 2, // Add border
+          borderColor: Colors.black.withOpacity(0.2), // Border color
+          snackStyle: SnackStyle.FLOATING, // Display Snackbar as floating
+          padding: const EdgeInsets.symmetric(
+            vertical: 12,
+            horizontal: 24,
+          ), // Adjust padding
+        );
       } else {
-        Get.snackbar("Error", "Failed to remove items from cart");
+        Get.snackbar(
+          "Error", "Failed to remove items from cart",
+          duration: const Duration(seconds: 2),
+          snackPosition: SnackPosition.TOP,
+          margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+          backgroundColor: Colors.red, // Change background color
+          colorText: Colors.white, // Change text color
+          borderRadius: 10, // Round the corners
+          borderWidth: 2, // Add border
+          borderColor: Colors.black.withOpacity(0.2), // Border color
+          snackStyle: SnackStyle.FLOATING, // Display Snackbar as floating
+          padding: const EdgeInsets.symmetric(
+            vertical: 12,
+            horizontal: 24,
+          ),
+        );
       }
 
       log("Remove cart response: ${response.body}");
     } catch (e) {
       log('Error removing items from cart: $e');
-      Get.snackbar("Error", "Error removing items from cart");
+      Get.snackbar(
+        "Error", "Error removing items from cart",
+        duration: const Duration(seconds: 2),
+        snackPosition: SnackPosition.TOP,
+        margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+        backgroundColor: Colors.red, // Change background color
+        colorText: Colors.white, // Change text color
+        borderRadius: 10, // Round the corners
+        borderWidth: 2, // Add border
+        borderColor: Colors.black.withOpacity(0.2), // Border color
+        snackStyle: SnackStyle.FLOATING, // Display Snackbar as floating
+        padding: const EdgeInsets.symmetric(
+          vertical: 12,
+          horizontal: 24,
+        ),
+      );
     }
   }
 
