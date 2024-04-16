@@ -28,7 +28,7 @@ class ItemDetailsView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Restaurant List',
+          '',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.deepOrange,

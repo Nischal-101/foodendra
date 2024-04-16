@@ -231,7 +231,7 @@ class CartItemsViewController extends GetxController {
           //   const SnackBar(content: Text('Items removed from cart')),
           // );
           Get.snackbar(
-            'Success', 'Items removed from cart',
+            'Success', 'Single Items removed from cart',
             duration: const Duration(seconds: 2),
             snackPosition: SnackPosition.TOP,
             margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
@@ -291,7 +291,7 @@ class CartItemsViewController extends GetxController {
         // Get.snackbar("Success", "Item removed from cart");
         Get.snackbar(
           "Success",
-          "Item removed from cart",
+          "Single Item removed from cart",
           duration: const Duration(seconds: 2),
           snackPosition: SnackPosition.TOP,
           margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),

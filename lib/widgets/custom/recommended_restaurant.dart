@@ -61,9 +61,13 @@ class RecommendedWidget extends StatelessWidget {
             ),
             Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.star,
                   size: 13,
+                  color: Colors.yellow[600],
+                ),
+                const SizedBox(
+                  width: 5,
                 ),
                 Text(
                   restaurantRating,
@@ -72,6 +76,14 @@ class RecommendedWidget extends StatelessWidget {
                 ),
                 const SizedBox(
                   width: 20,
+                ),
+                Icon(
+                  Icons.location_on,
+                  size: 13,
+                  color: Colors.blue[600],
+                ),
+                const SizedBox(
+                  width: 5,
                 ),
                 Text(
                   restaurantLocation,

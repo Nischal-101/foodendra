@@ -41,14 +41,14 @@ class MenuScreen extends StatelessWidget {
                 image:
                     "https://ajadynasty.com/wp-content/uploads/2022/06/IMG-0521.jpg", // Replace with your image URL
                 name: "Food",
-                count: "120",
+                count: "42",
               ),
               const SizedBox(height: 20),
               const MenuCard(
                 image:
                     "https://www.beveragedaily.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/beveragedaily.com/article/2020/03/31/beverage-webinar-today-what-drinks-do-consumers-want/10866454-1-eng-GB/Beverage-webinar-today-What-drinks-do-consumers-want.jpg", // Replace with your image URL
                 name: "Beverage",
-                count: "220",
+                count: "32",
               ),
               const SizedBox(height: 20),
               GestureDetector(
@@ -63,7 +63,7 @@ class MenuScreen extends StatelessWidget {
                     image:
                         "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/espresso-chocolate-chilli-cake-with-coffee-cream-b4890a9.jpg?quality=90&resize=556,505", // Replace with your image URL
                     name: "Desserts",
-                    count: "135",
+                    count: "15",
                   ),
                 ),
               ),

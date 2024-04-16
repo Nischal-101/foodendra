@@ -52,7 +52,7 @@ class ItemDetailsViewController extends GetxController {
           Get.snackbar(
             "Success",
             "Item added to cart successfully",
-            duration: const Duration(seconds: 3),
+            duration: const Duration(seconds: 2),
             snackPosition: SnackPosition.TOP,
             margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
             backgroundColor: Colors.white, // Change background color
@@ -66,7 +66,6 @@ class ItemDetailsViewController extends GetxController {
                 vertical: 12, horizontal: 24), // Adjust padding
             mainButton: TextButton(
               onPressed: () {
-                
                 Get.to(() => CartItemsView());
               },
               child: const Text(

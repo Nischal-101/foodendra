@@ -27,14 +27,14 @@ class DessertScreen extends StatelessWidget {
             imageUrl:
                 'https://images.immediate.co.uk/production/volatile/sites/30/2022/08/French-apple-tart-ffb6034.jpg?resize=768,574',
             name: 'French Apple Pie',
-            shop: 'Minute by tuk tuk',
+            shop: 'By BBQ Joint',
             rating: '4.9',
           ),
           const SizedBox(height: 10),
           dessertCard(
             imageUrl: 'https://i.ytimg.com/vi/RXBJhNpPBO4/sddefault.jpg',
             name: 'Dark Chocolate Cake',
-            shop: 'Cakes by Tella',
+            shop: 'Cakes by BBQ Joint',
             rating: '4.7',
           ),
           const SizedBox(height: 10),
@@ -42,7 +42,7 @@ class DessertScreen extends StatelessWidget {
             imageUrl:
                 'https://media-cdn.tripadvisor.com/media/photo-s/10/17/a8/b6/photo1jpg.jpg',
             name: 'Street Shake',
-            shop: 'Cafe Racer',
+            shop: 'By BBQ Joint',
             rating: '4.9',
           ),
           const SizedBox(height: 10),
@@ -50,7 +50,7 @@ class DessertScreen extends StatelessWidget {
             imageUrl:
                 'https://www.browneyedbaker.com/wp-content/uploads/2010/03/chewy-brownies-18-550.jpg',
             name: 'Fudgy Chewy Brownies',
-            shop: 'Minute by tuk tuk',
+            shop: 'By BBQ Joint',
             rating: '4.9',
           ),
         ],
