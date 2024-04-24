@@ -29,7 +29,7 @@ class SignupController extends GetxController {
     if (password != confirmPassword) {
       Get.snackbar(
         'Error', 'Passwords do not match',
-        duration: const Duration(seconds: 2),
+        duration: const Duration(seconds: 20),
         snackPosition: SnackPosition.TOP,
         margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
         backgroundColor: Colors.red, // Change background color
@@ -49,7 +49,7 @@ class SignupController extends GetxController {
     // API endpoint URL
     String url = Api.registerUrl;
     String urlLogin = Api.loginUrl;
-    String type = 'restaurant';
+    String type = 'customer';
 
     // Request body
     Map<String, String> body = {
@@ -95,12 +95,32 @@ class SignupController extends GetxController {
 
                 log('User: ${StorageHelper.getUser()}');
                 log('Token: ${StorageHelper.getToken()}');
+                Get.snackbar(
+                  "Success",
+                  "Sign up successful",
+                  duration: const Duration(seconds: 20),
+                  snackPosition: SnackPosition.TOP,
+                  margin:
+                      const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+                  backgroundColor: const Color.fromARGB(
+                      255, 20, 179, 25), // Change background color
+                  colorText: Colors.white, // Change text color
+                  borderRadius: 10, // Round the corners
+                  borderWidth: 2, // Add border
+                  // borderColor: Colors.black.withOpacity(0.2), // Border color
+                  // elevation: 5, // Add elevation
+                  snackStyle:
+                      SnackStyle.FLOATING, // Display Snackbar as floating
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 12, horizontal: 24), // Adjust padding
+                );
+
                 Get.offAll(Homepage());
               } else {
                 String errorMessage = jsonResponse['message'];
                 Get.snackbar(
                   'Error', errorMessage,
-                  duration: const Duration(seconds: 2),
+                  duration: const Duration(seconds: 10),
                   snackPosition: SnackPosition.TOP,
                   margin:
                       const EdgeInsets.only(bottom: 20, left: 20, right: 20),
@@ -157,7 +177,7 @@ class SignupController extends GetxController {
           String errorMessage = jsonResponse['message'];
           Get.snackbar(
             'Error', errorMessage,
-            duration: const Duration(seconds: 2),
+            duration: const Duration(seconds: 10),
             snackPosition: SnackPosition.TOP,
             margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
             backgroundColor: Colors.red, // Change background color

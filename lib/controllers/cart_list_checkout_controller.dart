@@ -231,7 +231,7 @@ class CartItemsViewController extends GetxController {
           //   const SnackBar(content: Text('Items removed from cart')),
           // );
           Get.snackbar(
-            'Success', 'Single Items removed from cart',
+            'Success', 'Items removed from cart',
             duration: const Duration(seconds: 2),
             snackPosition: SnackPosition.TOP,
             margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
@@ -278,7 +278,7 @@ class CartItemsViewController extends GetxController {
 
       // Use the provided restaurantId directly without reassigning
       final response = await http.post(
-        Uri.parse(Api.removeItemsFromCartUrl),
+        Uri.parse(Api.removeSingleItemsFromCartUrl),
         body: {
           'item_id': id.toString(),
           'restaurant_id': restaurantId.toString(),
@@ -291,7 +291,7 @@ class CartItemsViewController extends GetxController {
         // Get.snackbar("Success", "Item removed from cart");
         Get.snackbar(
           "Success",
-          "Single Item removed from cart",
+          "Item removed from cart",
           duration: const Duration(seconds: 2),
           snackPosition: SnackPosition.TOP,
           margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),

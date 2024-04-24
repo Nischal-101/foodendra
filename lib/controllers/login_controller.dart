@@ -38,6 +38,23 @@ class LoginController extends GetxController {
           // print('Token: ${StorageHelper.getToken()}');
 
           // Navigate to home page
+          Get.snackbar(
+            "Success",
+            "Login successful",
+            duration: const Duration(seconds: 10),
+            snackPosition: SnackPosition.TOP,
+            margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+            backgroundColor:
+                Color.fromARGB(255, 20, 179, 25), // Change background color
+            colorText: Colors.white, // Change text color
+            borderRadius: 10, // Round the corners
+            borderWidth: 2, // Add border
+            // borderColor: Colors.black.withOpacity(0.2), // Border color
+            // elevation: 5, // Add elevation
+            snackStyle: SnackStyle.FLOATING, // Display Snackbar as floating
+            padding: const EdgeInsets.symmetric(
+                vertical: 12, horizontal: 24), // Adjust padding
+          );
           Get.offAll(Homepage());
         } else {
           String errorMessage = jsonResponse['message'];
@@ -58,6 +75,7 @@ class LoginController extends GetxController {
             ),
           );
         }
+        
       } else {
         Get.snackbar(
           'Error', 'Failed to login. Please try again later.',

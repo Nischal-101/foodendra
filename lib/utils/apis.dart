@@ -24,6 +24,7 @@ class Api {
       "$baseUrl/api/get_add_to_cart_by_resturant_user.php";
   static const String checkoutUrl = "$baseUrl/api/checkout.php";
   static const String removeItemsFromCartUrl = "$baseUrl/api/remove_cart.php";
+  static const String removeSingleItemsFromCartUrl = "$baseUrl/api/remove_single_item_cart.php";
   static const String getUpdateProfileUrl = "$baseUrl/api/update_user_info.php";
   static const String getOrderHistory = "$baseUrl/api/get_order_history.php";
   // static const String getHistory = "$baseUrl/api/get_appointments.php";

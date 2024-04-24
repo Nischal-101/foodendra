@@ -43,7 +43,7 @@ class EditUserProfilePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              height: 200,
+              // height: 10,
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: Colors.deepOrangeAccent,
@@ -52,47 +52,23 @@ class EditUserProfilePage extends StatelessWidget {
                   bottomRight: Radius.circular(30),
                 ),
               ),
-              child: Column(
+              child: const Column(
                 children: [
-                  const SizedBox(
+                  SizedBox(
                     height: 15,
                   ),
-                  const Center(
-                    child: CircleAvatar(
-                      radius: 70,
-                      backgroundImage: NetworkImage(
-                          'https://upload.wikimedia.org/wikipedia/commons/1/18/Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg'),
-                    ),
-                  ),
-                  const SizedBox(
+                  // const Center(
+                  //   child: CircleAvatar(
+                  //     radius: 70,
+                  //     backgroundImage: NetworkImage(
+                  //         'https://upload.wikimedia.org/wikipedia/commons/1/18/Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg'),
+                  //   ),
+                  // ),
+                  SizedBox(
                     height: 10,
                   ),
-                  InkWell(
-                    onTap: () {
-                      // Get.to(Homepage());
-                    },
-                    child: const Row(
-                      // crossAxisAlignment: CrossAxisAlignment.center,
-                      // mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 112,
-                        ),
-                        Icon(
-                          Icons.edit,
-                          color: Colors.white,
-                          size: 16,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          "Change profile photo",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    ),
-                  )
+
+                  // )
                 ],
               ),
             ),
@@ -118,7 +94,7 @@ class EditUserProfilePage extends StatelessWidget {
               controller: addressController,
             ),
             const SizedBox(
-              height: 36,
+              height: 211,
             ),
             SizedBox(
               width: Get.width,

@@ -1,4 +1,5 @@
 // import 'dart:developer';
+// import 'dart:ui';
 
 // import 'package:flutter/material.dart';
 // import 'package:foodendra/controllers/cart_list_checkout_controller.dart';
@@ -19,7 +20,7 @@
 //     return Scaffold(
 //       appBar: AppBar(
 //         title: const Text(
-//           'My Cart',
+//           'Check out',
 //           style: TextStyle(color: Colors.white),
 //         ),
 //         backgroundColor: Colors.deepOrange,
@@ -34,6 +35,37 @@
 //                 crossAxisAlignment: CrossAxisAlignment.start,
 //                 children: [
 //                   // const SizedBox(height: 20),
+//                   Row(
+//                     children: [
+//                       SizedBox(
+//                         width: Get.width / 3,
+//                       ),
+//                       const Text(
+//                         'Your total:',
+//                         style: TextStyle(
+//                             fontSize: 30, fontWeight: FontWeight.bold),
+//                       ),
+//                     ],
+//                   ),
+//                   Row(
+//                     children: [
+//                       SizedBox(
+//                         width: Get.width / 3,
+//                       ),
+//                       const Text(
+//                         '    1750',
+//                         style: TextStyle(
+//                             color: Colors.deepOrangeAccent,
+//                             fontSize: 30,
+//                             fontWeight: FontWeight.bold),
+//                       ),
+//                     ],
+//                   ),
+
+//                   const SizedBox(
+//                     height: 30,
+//                   ),
+
 //                   const Padding(
 //                     padding: EdgeInsets.symmetric(horizontal: 15),
 //                     child: Text(
@@ -106,7 +138,7 @@
 //                               ],
 //                               onSuccess: (success) async {
 //                                 log("Success");
-//                                 await c.checkout(context, restaurantId,);
+//                                 // await c.checkout(context, restaurantId,);
 //                                 c.fetchCartItems();
 //                               },
 //                               onFailure: (fa) {

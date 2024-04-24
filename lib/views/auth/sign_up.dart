@@ -14,174 +14,136 @@ class SignupScreen extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 25),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  child: const Text(
-                    "Sign Up",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 30,
-                        fontWeight: FontWeight.w800),
+                const SizedBox(height: 15),
+                const Text(
+                  "Sign Up",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                const Text(
-                  "Add your details to signup",
+                const SizedBox(height: 10),
+                Text(
+                  "Enter your details to sign up",
                   style: TextStyle(
-                      color: Color.fromARGB(255, 125, 125, 125),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500),
+                    color: Colors.grey[600],
+                    fontSize: 16,
+                  ),
                 ),
-                const SizedBox(
-                  height: 25,
+                const SizedBox(height: 40),
+                _buildTextField(
+                  controller: s.usernameController,
+                  hintText: 'Username',
+                  prefixIcon: Icons.person,
                 ),
+                const SizedBox(height: 20),
+                _buildTextField(
+                  controller: s.emailController,
+                  hintText: 'Email',
+                  prefixIcon: Icons.email,
+                ),
+                const SizedBox(height: 20),
+                _buildTextField(
+                  controller: s.addressController,
+                  hintText: 'Address',
+                  prefixIcon: Icons.location_on,
+                ),
+                const SizedBox(height: 20),
+                _buildTextField(
+                  controller: s.phoneNumberController,
+                  hintText: 'Phone Number',
+                  prefixIcon: Icons.phone,
+                ),
+                const SizedBox(height: 20),
+                _buildTextField(
+                  controller: s.passwordController,
+                  hintText: 'Password',
+                  prefixIcon: Icons.lock,
+                  isPassword: true,
+                ),
+                const SizedBox(height: 20),
+                _buildTextField(
+                  controller: s.confirmPasswordController,
+                  hintText: 'Confirm Password',
+                  prefixIcon: Icons.lock,
+                  isPassword: true,
+                ),
+                const SizedBox(height: 30),
                 SizedBox(
-                  height: 55,
-                  child: TextField(
-                      controller: s.usernameController,
-                      decoration: InputDecoration(
-                        hintText: 'Username',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                              25.0), // Set border radius here
-                        ),
-                      )),
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                SizedBox(
-                  height: 55,
-                  child: TextField(
-                      controller: s.emailController,
-                      decoration: InputDecoration(
-                        hintText: 'Your Email',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                              25.0), // Set border radius here
-                        ),
-                      )),
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                SizedBox(
-                  height: 55,
-                  child: TextField(
-                      controller: s.addressController,
-                      decoration: InputDecoration(
-                        hintText: 'Address',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                              25.0), // Set border radius here
-                        ),
-                      )),
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                SizedBox(
-                  height: 55,
-                  child: TextField(
-                      controller: s.phoneNumberController,
-                      decoration: InputDecoration(
-                        hintText: 'Phone number',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                              25.0), // Set border radius here
-                        ),
-                      )),
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                SizedBox(
-                  height: 55,
-                  child: TextField(
-                      controller: s.passwordController,
-                      decoration: InputDecoration(
-                        hintText: 'Password',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                              25.0), // Set border radius here
-                        ),
-                      )),
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                SizedBox(
-                  height: 55,
-                  child: TextField(
-                      controller: s.confirmPasswordController,
-                      decoration: InputDecoration(
-                        hintText: 'Confirm password',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                              25.0), // Set border radius here
-                        ),
-                      )),
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                SizedBox(
+                  width: double.infinity,
                   height: 60,
-                  width: Get.width,
                   child: ElevatedButton(
                     onPressed: () {
                       s.onSubmit();
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 255, 90, 45),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      backgroundColor: Colors.deepOrange,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
                       ),
                     ),
-                    child: const Text('Sign Up',
-                        style: TextStyle(color: Colors.white, fontSize: 17)),
+                    child: const Text(
+                      'Sign Up',
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
                   ),
                 ),
-                const SizedBox(
-                  height: 25,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Already have an account?",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 82, 82, 82),
+                const SizedBox(height: 20),
+                InkWell(
+                  onTap: () {
+                    Get.to(LoginScreen());
+                  },
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Already have an account? ",
+                        style: TextStyle(
+                          color: Colors.blue,
                           fontSize: 16,
-                          fontWeight: FontWeight.w400),
-                    ),
-                    const SizedBox(
-                      width: 2,
-                    ),
-                    InkWell(
-                        onTap: () {
-                          Get.to(LoginScreen());
-                        },
-                        child: const Text(
-                          "Login",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 255, 90, 45),
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                        ))
-                  ],
-                )
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        " Login",
+                        style: TextStyle(
+                          color: Colors.deepOrange,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ],
             ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String hintText,
+    required IconData prefixIcon,
+    bool isPassword = false,
+  }) {
+    return SizedBox(
+      height: 55,
+      child: TextField(
+        controller: controller,
+        obscureText: isPassword,
+        decoration: InputDecoration(
+          hintText: hintText,
+          prefixIcon: Icon(prefixIcon),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25.0),
           ),
         ),
       ),

@@ -232,6 +232,8 @@ class CartItemsView extends StatelessWidget {
                                 context,
                                 restaurantId,
                               );
+
+                              // Get.to(() => Checkout());
                             },
                             child: Padding(
                               padding:

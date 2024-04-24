@@ -28,7 +28,7 @@ class UserProfilePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    height: 200,
+                    height: 10,
                     width: double.infinity,
                     decoration: const BoxDecoration(
                       color: Colors.deepOrangeAccent,
@@ -37,13 +37,13 @@ class UserProfilePage extends StatelessWidget {
                         bottomRight: Radius.circular(30),
                       ),
                     ),
-                    child: const Center(
-                      child: CircleAvatar(
-                        radius: 70,
-                        backgroundImage: NetworkImage(
-                            'https://upload.wikimedia.org/wikipedia/commons/1/18/Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg'),
-                      ),
-                    ),
+                    // child: const Center(
+                    //   child: CircleAvatar(
+                    //     radius: 70,
+                    //     backgroundImage: NetworkImage(
+                    //         'https://upload.wikimedia.org/wikipedia/commons/1/18/Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg'),
+                    //   ),
+                    // ),
                   ),
                   const SizedBox(height: 35),
                   // const SizedBox(height: 32),

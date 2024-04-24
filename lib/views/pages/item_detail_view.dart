@@ -199,6 +199,7 @@ class ItemDetailsView extends StatelessWidget {
                         //call method to add the item to cart in database
                         c.addToCart(restaurantId, itemId, price);
                         c.quantity.value = 1;
+                        Get.back();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.deepOrangeAccent,
